@@ -9,7 +9,7 @@ character = load_image('animation_sheet.png')
 hand_arrow = load_image('hand_arrow.png')
 
 def handle_events():
-    global running
+    global running, ranx, rany, x, y
     events = get_events()
     for event in events:
         if event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
@@ -17,14 +17,16 @@ def handle_events():
     pass
 
 running = True
+ranx, rany = random.randint(21, 1256), random.randint(52, 998)
+x, y = TUK_WIDTH // 2, TUK_HEIGHT // 2
 frame = 0
 hide_cursor()
 
 while running:
     clear_canvas()
     TUK_ground.draw(TUK_WIDTH // 2, TUK_HEIGHT // 2)
-    character.clip_draw(frame * 100, 100, 100, 100, TUK_WIDTH // 2, TUK_HEIGHT // 2)
-    hand_arrow.clip_draw(0, 0, 50, 50, 21, 52)
+    character.clip_draw(frame * 100, 100, 100, 100, x, y)
+    hand_arrow.clip_draw(0, 0, 50, 52, ranx, rany)
     update_canvas()
     frame = (frame + 1) % 8
     handle_events()
