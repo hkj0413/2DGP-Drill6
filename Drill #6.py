@@ -1,4 +1,5 @@
 from pico2d import *
+import random
 
 TUK_WIDTH, TUK_HEIGHT = 1280, 1024
 open_canvas(TUK_WIDTH, TUK_HEIGHT)
@@ -15,11 +16,15 @@ def handle_events():
     pass
 
 running = True
+frame = 0
+hide_cursor()
 
 while running:
     clear_canvas()
     TUK_ground.draw(TUK_WIDTH // 2, TUK_HEIGHT // 2)
+    character.clip_draw(frame * 100, 100, 100, 100, 30, 60)
     update_canvas()
+    frame = (frame + 1) % 8
     handle_events()
 
 close_canvas()
